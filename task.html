@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: bold;
+      background-color:white;
+      padding: 50px;
+    }
+    form {
+      background-color: white;
+      padding: 50px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+    }
+    .section-title {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="/submit" method="POST">
+    <h2>Student Registration</h2>
+
+    <label>Full Name:
+      <input type="text" name="fullname" required>
+    </label>
+
+    <label>Email:
+      <input type="email" name="email" required>
+    </label>
+     <label>Phone Number:
+    <input type="tel" name="phone" pattern="[0-9]{10}" required>
+  </label>
+
+
+
+    <div class="section-title">Gender:</div>
+    <label><input type="radio" name="gender" value="Male" required> Male</label>
+    <label><input type="radio" name="gender" value="Female"> Female</label>
+    <label><input type="radio" name="gender" value="Other"> Other</label>
+
+    <div class="section-title">Select Your Interests:</div>
+    <label><input type="checkbox" name="interests" value="Sports"> Sports</label>
+    <label><input type="checkbox" name="interests" value="Music"> Music</label>
+    <label><input type="checkbox" name="interests" value="Art"> Art</label>
+    <label><input type="checkbox" name="interests" value="Technology"> Technology</label>
+     <label>
+   
+
+
+    <label>
+      <input type="submit" value="Register">
+    </label>
+  </form>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const fullName = form.querySelector('input[name="fullname"]').value.trim();
+      const email = form.querySelector('input[name="email"]').value.trim();
+      const phone = form.querySelector('input[name="phone"]').value.trim();
+      const gender = form.querySelector('select[name="gender"]').value;
+      const interests = Array.from(form.querySelectorAll('input[name="interests"]:checked'))
+                             .map(checkbox => checkbox.value);
+      if (!fullName || !email || !phone || !gender) {
+        alert("Please fill out all required fields.");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Phone number must be 10 digits.");
+        return;
+      }
+
+      let message = `✅ Registration Successful!\n\n`;
+      message += `Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nGender: ${gender}\n`;
+      message += `Interests: ${interests.length > 0 ? interests.join(", ") : "None"}`;
+
+      alert(message);
+
+    
+      form.reset();
+    );
+  );
+</script>
+  </script>
+
+</body>
+</html>
